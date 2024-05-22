@@ -38,4 +38,8 @@ public class UserService {
             throw new EntityExistsException("Essa conta já existe!");
         }
     }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
 }

@@ -1,6 +1,7 @@
 package br.com.auth_api.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serial;
