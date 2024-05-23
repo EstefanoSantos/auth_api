@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -37,6 +39,15 @@ public class UserService {
         } else {
             throw new EntityExistsException("Essa conta já existe!");
         }
+    }
+
+    public Optional<User> getUser(String username) {
+        var user = userRepository.findByUsername(username);
+
+        if (user.isEmpty()) {
+            throw new NoSuchElementException("Username does not exists or is insvalid.");
+        }
+        return user;
     }
 
     public List<User> getUsers() {

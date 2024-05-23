@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -26,6 +27,14 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @ResponseBody
+    @GetMapping("/user/{username}")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+    public ResponseEntity<Optional<User>> getUser(@PathVariable("username") String username) {
+        var user = userService.getUser(username);
+
+        return ResponseEntity.ok(user);
+    }
 
     @GetMapping(value = "/users")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
